@@ -38,7 +38,7 @@ const Login = () => {
         setUserHandler(response.data.user);
         // console.log(response.token);
         login(response.token);
-        navigate("/Home");
+        navigate("/");
       } catch (error) {
         console.log("login failed", error.message);
       }
