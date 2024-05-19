@@ -3,6 +3,7 @@ import { Dialog } from "@mui/material";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import axios from "axios";
 import Head from "../UI/Head";
+import API_URL from "../Util/backend";
 
 const AddInitiative = ({ open, setOpen }) => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const AddInitiative = ({ open, setOpen }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/addinitiative",
+        `${API_URL}/addinitiative`,
         formData
       ); //passing the data
       console.log("initative added", response.data);

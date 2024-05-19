@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {} from "@mui/material";
 import axios from "axios";
 import CommunityPost from "./CommunityPost";
 import {
@@ -11,6 +10,7 @@ import {
   IconButton,
   Paper,
 } from "@mui/material";
+import API_URL from "../Util/backend";
 
 const Community = () => {
   const [description, setDescription] = useState("");
@@ -24,7 +24,7 @@ const Community = () => {
     data.set("file", files[0]);
     e.preventDefault();
     console.log(files);
-    const response = await axios.post("http://localhost:5000/post", data);
+    const response = await axios.post(`${API_URL}/post`, data);
     setDescription("");
     setFiles("");
     console.log("got the data", response.data);
@@ -34,7 +34,7 @@ const Community = () => {
     // Fetch data when the component mounts
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/post");
+        const response = await axios.get(`${API_URL}/post`);
         setposts(response.data);
         console.log("got the posts", response.data);
       } catch (error) {

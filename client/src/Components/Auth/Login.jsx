@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Container } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import API_URL from "../Util/backend";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ const Login = () => {
       // alert("correct");
       try {
         const response = await axios.post(
-          "http://localhost:5000/login",
+          `${API_URL}/login`,
           formData
         ); //passing the data
         console.log("login Success", response.data);

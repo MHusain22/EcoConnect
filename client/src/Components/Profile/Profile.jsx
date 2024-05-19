@@ -3,6 +3,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
 import { Container, Typography,TextField, Button, Avatar } from '@mui/material';
 import axios from "axios";
+import API_URL from "../Util/backend";
 
 const Profile = () => {
   const { isAuthenticated, user } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Profile = () => {
     e.preventDefault();
     const id = user._id;
         try {
-          const response = await axios.put(`http://localhost:5000/${id}`, userData);
+          const response = await axios.put(`${API_URL}/${id}`, userData);
           console.log('Profile updated successfully!',response);
 
           // Optionally, you can redirect the user to another page or perform other actions after successful update

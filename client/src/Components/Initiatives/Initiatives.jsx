@@ -7,6 +7,7 @@ import AddInitiative from "./AddInitiative";
 import axios from "axios";
 import Map from "../Map/Map";
 import Head from "../UI/Head";
+import API_URL from "../Util/backend";
 
 const Initiatives = () => {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ const Initiatives = () => {
     // Fetch data when the component mounts
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/getinitiative");
+        const response = await axios.get(`${API_URL}/getinitiative`);
         setinitative(response.data);
       } catch (error) {
         console.error("Error fetching articles:", error);

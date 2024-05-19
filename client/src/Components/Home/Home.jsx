@@ -1,10 +1,7 @@
 import React from 'react'
-import Navbar from './Navbar/Navbar'
-// import {bg} from '../Images/bg.jpg'
 import Box from '@mui/material/Box';
 import Challenges from '../Challenges/Challenges';
 import Resources from '../Resources/Resources';
-import CarbonCalculator from '../CarbonCalculator/CarbonCalculator';
 import Envdata from '../Envdata/Envdata';
 
 const Home = () => {

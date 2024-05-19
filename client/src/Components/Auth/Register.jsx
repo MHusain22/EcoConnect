@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Container } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../Util/backend';
 
 const Register = () => {
 
@@ -25,7 +26,7 @@ const Register = () => {
         console.log(email)
         if (email.length > 0 && password.length > 0 && username.length > 0) {
             try {
-                const response = await axios.post("http://localhost:5000/register", formData); //passing the data
+                const response = await axios.post(`${API_URL}/register`, formData); //passing the data
                 console.log("register Success", response.data);
                 navigate('/login');
             } catch (error) {

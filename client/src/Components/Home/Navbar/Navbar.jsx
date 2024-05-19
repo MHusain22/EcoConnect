@@ -11,24 +11,22 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-
 
 const pages = ["Home", "Initiatives", "Community"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {
-
-  const { isAuthenticated, logout,user } = useContext(AuthContext);
+  const { isAuthenticated, logout, user } = useContext(AuthContext);
   console.log(user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -101,13 +99,15 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link to={`/${page}`} style={{ textDecoration: "none" }}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Typography textAlign="center">Home</Typography>
+              </Link>
+              <Link to="/Initiatives" style={{ textDecoration: "none" }}>
+                <Typography textAlign="center">Initiatives</Typography>
+              </Link>
+              <Link to="/Community" style={{ textDecoration: "none" }}>
+                <Typography textAlign="center">Community</Typography>
+              </Link>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -129,51 +129,66 @@ const Navbar = () => {
           >
             EcoConnect
           </Typography>
-          <Box sx={{ flexGrow: 1, alignItems:"right", display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={`/${page}`} style={{ textDecoration: "none" }}>
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              </Link>
-            ))}
+          <Box
+            sx={{
+              flexGrow: 1,
+              alignItems: "right",
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Home
+              </Button>
+            </Link>
+            <Link to="/Initiatives" style={{ textDecoration: "none" }}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Initiatives
+              </Button>
+            </Link>
+            <Link to="/Community" style={{ textDecoration: "none" }}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Community
+              </Button>
+            </Link>
           </Box>
 
-          
           {isAuthenticated ? (
-          <>
-          <Link to="/profile" style={{textDecoration:"none"}}>
-          <Button color="inherit">
-
-          <Avatar
-            alt={user?.username}
-            src={`/path-to-badge-images/${user?.username
-              .replace(/\s+/g, "-")
-              .toLowerCase()}.png`}
-            style={{ width: 45, height: 45, margin: "0px auto" }}
-          />
-          </Button>
-          
-          </Link>
-          <Button color="inherit" onClick={handleLogout}>
-            Logout
-          </Button>
-          </>
-        ) : (
-          <>
-          <Button color="inherit" onClick={() => navigate('/login')}>
-            Login
-          </Button>
-          <Button color="inherit" onClick={() => navigate('/register')}>
-          Register
-          </Button>
-          </>
-        )}
-        
+            <>
+              <Link to="/profile" style={{ textDecoration: "none" }}>
+                <Button color="inherit">
+                  <Avatar
+                    alt={user?.username}
+                    src={`/path-to-badge-images/${user?.username
+                      .replace(/\s+/g, "-")
+                      .toLowerCase()}.png`}
+                    style={{ width: 45, height: 45, margin: "0px auto" }}
+                  />
+                </Button>
+              </Link>
+              <Button color="inherit" onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" onClick={() => navigate("/login")}>
+                Login
+              </Button>
+              <Button color="inherit" onClick={() => navigate("/register")}>
+                Register
+              </Button>
+            </>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
