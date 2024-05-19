@@ -7,6 +7,7 @@ import cors from "cors";
 import multer from "multer"; 
 import imgbbUploader from "imgbb-uploader";
 import fs from 'fs';
+import dotenv from 'dotenv';
 
 const app = express();
 app.use(express.json());
@@ -14,10 +15,11 @@ app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 // app.use('/uploads', express.static(__dirname + '/uploads'));
 const uploadMiddlewear = multer({ dest: 'uploads' });
+dotenv.config();
 
 mongoose
   .connect(
-    "mongodb+srv://husainvijapura:mh123@mh.palj3oj.mongodb.net/?retryWrites=true&w=majority&appName=mh",
+    process.env.MONGO_URI,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -39,7 +41,7 @@ const Initiative =
   mongoose.model("Initiative", {
     name: String,
     description: String,
-    imgurl: String,
+
   });
 
   const PostModel = 
@@ -62,7 +64,7 @@ const Initiative =
     const uplfilepath = newPath;
 
     // upload
-    await imgbbUploader('f00f71aa00c5346a2678f671b780f378', newPath)
+    await imgbbUploader(process.env.IMGBB, newPath)
         .then((response) => {
             newPath = response.url;
         })
@@ -84,16 +86,36 @@ const Initiative =
     // })
 })
 
+app.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    // Find the article by ID and update it with the new data
+    const updatedProfile = await User.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+
+    if (!updatedProfile) {
+      return res.status(404).json({ message: "profile not found" });
+    }
+
+    res.json(updatedProfile);
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 app.get('/post', async (req, res) => {
     const posts = await PostModel.find().sort({ createdAt: -1 }).limit(20);
     return res.json(posts);
 })
 
 app.post("/addinitiative", async (req, res) => {
-  const { name, description, imgUrl } = req.body;
-  console.log(name, description, imgUrl);
+  const { name, description } = req.body;
+  console.log(name, description);
   try {
-    const newInit = new Initiative({ name, description, imgUrl });
+    const newInit = new Initiative({ name, description });
     await newInit.save();
     return res.status(200).json({ message: "successful" });
   } catch (error) {

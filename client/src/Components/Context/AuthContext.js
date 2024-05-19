@@ -15,7 +15,7 @@ const setUserHandler = (userdata) => {
   const login = (token) => {
     localStorage.setItem('token', token);
     setIsAuthenticated(true);
-    // navigate('/home');
+    // navigate('/');
   };
 
   const logout = () => {

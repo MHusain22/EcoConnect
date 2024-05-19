@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useState,useContext } from "react";
@@ -18,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../Context/AuthContext";
 
 
-const pages = ["Home", "Initiatives", "Community", "Contact Us"];
+const pages = ["Home", "Initiatives", "Community"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {
@@ -130,7 +129,7 @@ const Navbar = () => {
           >
             EcoConnect
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, alignItems:"right", display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Link to={`/${page}`} style={{ textDecoration: "none" }}>
                 <Button
@@ -147,7 +146,19 @@ const Navbar = () => {
           
           {isAuthenticated ? (
           <>
-          <p>{user?.username}</p>
+          <Link to="/profile" style={{textDecoration:"none"}}>
+          <Button color="inherit">
+
+          <Avatar
+            alt={user?.username}
+            src={`/path-to-badge-images/${user?.username
+              .replace(/\s+/g, "-")
+              .toLowerCase()}.png`}
+            style={{ width: 45, height: 45, margin: "0px auto" }}
+          />
+          </Button>
+          
+          </Link>
           <Button color="inherit" onClick={handleLogout}>
             Logout
           </Button>
@@ -162,38 +173,7 @@ const Navbar = () => {
           </Button>
           </>
         )}
-            {/* <Link to="/register">Register</Link>
-         <Link to="/Login">Login</Link> */}
-
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+        
         </Toolbar>
       </Container>
     </AppBar>

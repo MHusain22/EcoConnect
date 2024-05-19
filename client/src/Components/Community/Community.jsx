@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-import { TextField, Typography, Container } from "@mui/material";
+import {} from "@mui/material";
 import axios from "axios";
-import Button from "@mui/material/Button";
-import "./Community.css";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import CommunityPost from "./CommunityPost";
+import {
+  Box,
+  TextField,
+  Typography,
+  Container,
+  Button,
+  IconButton,
+  Paper,
+} from "@mui/material";
 
 const Community = () => {
-  const [description, setDescription] = useState('');
-  const [files, setFiles] = useState('');
+  const [description, setDescription] = useState("");
+  const [files, setFiles] = useState("");
 
   const [posts, setposts] = useState([]);
 
@@ -20,9 +25,9 @@ const Community = () => {
     e.preventDefault();
     console.log(files);
     const response = await axios.post("http://localhost:5000/post", data);
-    setDescription('');
-    setFiles('');
-    // console.log("got the data",response.data);
+    setDescription("");
+    setFiles("");
+    console.log("got the data", response.data);
   };
 
   useEffect(() => {
@@ -39,62 +44,80 @@ const Community = () => {
 
     fetchData();
   }, []);
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     const { email, password } = formData;
-
-  //     if (email.length > 0 && password.length > 0) {
-  //       // alert("correct");
-  //       try {
-  //         const response = await axios.post(
-  //           "http://localhost:5000/login",
-  //           formData
-  //         ); //passing the data
-  //         console.log("login Success", response.data);
-
-  //       } catch (error) {
-  //         console.log("login failed", error.message);
-  //       }
-  //     } else {
-  //       console.log("User does not exist");
-  //     }
-  //     setFormData({ email: "", password: "" });
-  //   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-      <div className="Col2">
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" gutterBottom>
-            Create Post
-          </Typography>
+    <Box sx={{ display: "flex", justifyContent: "space-between", padding: 2 }}>
+      <Container maxWidth="sm" sx={{ marginTop: 2 }}>
+        <Paper elevation={3} sx={{ padding: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+            <div>
+              <svg
+                width="40px"
+                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-10mi8st-MuiSvgIcon-root-MuiAvatar-fallback"
+                focusable="false"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                data-testid="PersonIcon"
+              >
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+              </svg>
+            </div>
+            <Typography variant="h6" sx={{ marginLeft: 2 }}>
+              Create a Post
+            </Typography>
+          </Box>
           <form method="post" onSubmit={handleSubmit}>
-            <textarea
-              rows={5}
-              cols={70}
-              type="description"
-              placeholder="what do you want to talk about"
+            <TextField
+              multiline
+              rows={4}
+              variant="outlined"
+              fullWidth
+              placeholder="What do you want to talk about?"
               value={description}
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
+              onChange={(e) => setDescription(e.target.value)}
+              sx={{ marginBottom: 2 }}
               required
             />
-            <input
-              type="file"
-              onChange={(e) => {
-                setFiles(e.target.files);
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 2,
               }}
-              required
-            />
-
-            <Button type="submit" variant="contained" color="primary" fullWidth>
-              Create Post
+            >
+              <IconButton color="primary" component="label">
+                <input
+                  type="file"
+                  onChange={(e) => setFiles(e.target.files)}
+                  required
+                />
+              </IconButton>
+            </Box>
+            <Button
+              type="submit"
+              sx={{
+                background: "var(--var-color)",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "var(--var-hover)",
+                },
+              }}
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Post
             </Button>
           </form>
-        </Container>
-        <CommunityPost posts={posts}/>
-      </div>
+        </Paper>
+        <Box sx={{ marginTop: 4 }}>
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            POSTS
+          </Typography>
+          <CommunityPost posts={posts} />
+        </Box>
+      </Container>
       <div className="col2"></div>
     </Box>
   );

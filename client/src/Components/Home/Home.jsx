@@ -2,7 +2,10 @@ import React from 'react'
 import Navbar from './Navbar/Navbar'
 // import {bg} from '../Images/bg.jpg'
 import Box from '@mui/material/Box';
-
+import Challenges from '../Challenges/Challenges';
+import Resources from '../Resources/Resources';
+import CarbonCalculator from '../CarbonCalculator/CarbonCalculator';
+import Envdata from '../Envdata/Envdata';
 
 const Home = () => {
   return (
@@ -10,7 +13,7 @@ const Home = () => {
         
         <Box
       sx={{
-        height: '90vh',
+        height: '91vh',
         backgroundImage: `
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url(/bg.jpg)
@@ -25,10 +28,13 @@ const Home = () => {
     >
       <Box sx={{ textAlign: 'center', color:"white"}}>
         {/* Your centered text */}
-        <h1>Centered Text</h1>
-        <p>This text is centered both horizontally and vertically.</p>
+        <h1 style={{fontSize:"40px"}}>Welcome to the World EcoConnect</h1>
+        <p> Our platform is dedicated to empowering individuals and communities to take action towards environment.</p>
       </Box>
     </Box>
+    <Challenges />
+    <Resources />
+    <Envdata />
     </div>
   )
 }

@@ -8,6 +8,8 @@ import Community from "./Components/Community/Community";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
 import AuthProvider from "./Components/Context/AuthContext";
+import Profile from "./Components/Profile/Profile";
+import Footer from "./Components/Footer/Footer";
 
 const App = () => {
 
@@ -19,18 +21,21 @@ const App = () => {
         <Route exact path="/Home" element={<Home />} />
       </Routes>
       <Routes>
-        <Route  path="/Initiatives" element={<Initiatives />} />
+        <Route exact path="/Initiatives" element={<Initiatives />} />
       </Routes>
       <Routes>
-        <Route  path="/Community" element={<Community />} />
+        <Route exact path="/Community" element={<Community />} />
       </Routes>
       <Routes>
-        <Route  path="/login" element={<Login />} />
+        <Route exact path="/login" element={<Login />} />
       </Routes>
       <Routes>
-        <Route  path="/register" element={<Register />} />
+        <Route exact path="/register" element={<Register />} />
       </Routes>
-      
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+      <Footer />
       
     </BrowserRouter>
     </AuthProvider>

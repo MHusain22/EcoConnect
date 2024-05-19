@@ -1,20 +1,29 @@
-import React from 'react'
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 
-const CommunityPost = ({posts}) => {
+const CommunityPost = ({ posts }) => {
   return (
-   
-        <>
-            {posts.map((item) => (
-                <>
-                    <p>{item.description}</p>
-                    <img height="100px" width="200px" src={item.cover} alt="" />
-                    
-                </>
+    <Box>
+      {posts.map((item, index) => (
+        <Card key={index} sx={{ marginBottom: 2 }}>
+          <CardContent>
+            {item.cover && (
+              <CardMedia
+                component="img"
+                height="140"
+                image={item.cover}
+                alt="Post image"
+                sx={{ marginTop: 2 }}
+              />
+            )}
+            <Typography variant="body1" component="p">
+              {item.description}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </Box>
+  );
+};
 
-            ))}
-        </>
-  
-  )
-}
-
-export default CommunityPost
+export default CommunityPost;
