@@ -12,32 +12,30 @@ import Profile from "./Components/Profile/Profile";
 import Footer from "./Components/Footer/Footer";
 
 const App = () => {
-
   return (
     <AuthProvider>
-    <BrowserRouter>
-    <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/Initiatives" element={<Initiatives />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/Community" element={<Community />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/login" element={<Login />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/register" element={<Register />} />
-      </Routes>
-      <Routes>
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-      <Footer />
-      
-    </BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+        </Routes>
+        <Routes>
+          <Route path="/Initiatives" element={<Initiatives />} />
+        </Routes>
+        <Routes>
+          <Route path="/Community" element={<Community />} />
+        </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Routes>
+          <Route path="/register" element={<Register />} />
+        </Routes>
+        <Routes>
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </AuthProvider>
   );
 };
