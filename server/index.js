@@ -12,7 +12,7 @@ import dotenv from 'dotenv';
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }));
+app.use(cors());
 // app.use('/uploads', express.static(__dirname + '/uploads'));
 const uploadMiddlewear = multer({ dest: 'uploads' });
 dotenv.config();
