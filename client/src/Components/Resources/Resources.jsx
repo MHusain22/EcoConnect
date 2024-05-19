@@ -21,17 +21,16 @@ const initialResources = [
     title: "Sustainable Living Tips",
     description: "Learn how to live sustainably with these easy tips.",
     type: "Article",
-    url: "https://example.com/sustainable-living-tips",
+    url: "https://www.cbs.de/en/blog/sustainable-living-tips-for-a-more-sustainable-lifestyle/",
   },
   {
     id: 2,
     title: "Recycling 101",
     description: "A video guide on how to recycle correctly.",
     type: "Video",
-    url: "https://example.com/recycling-101",
+    url: "https://www.youtube.com/watch?v=6jQ7y_qQYUA",
   },
   
-  // Add more resources as needed
 ];
 
 const Resources = () => {

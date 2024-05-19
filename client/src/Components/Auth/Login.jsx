@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { TextField, Button, Typography, Container } from "@mui/material";
+import { TextField, Button,Box, Typography, Container } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
@@ -29,10 +29,7 @@ const Login = () => {
     if (email.length > 0 && password.length > 0) {
       // alert("correct");
       try {
-        const response = await axios.post(
-          `${API_URL}/login`,
-          formData
-        ); //passing the data
+        const response = await axios.post(`${API_URL}/login`, formData); //passing the data
         console.log("login Success", response.data);
         console.log(response.data.user);
         setUserHandler(response.data.user);
@@ -49,35 +46,62 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" align="center" gutterBottom>
-        Login
-      </Typography>
-      <form method="post" onSubmit={handleSubmit}>
-        <TextField
-          label="Email"
-          variant="outlined"
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Password"
-          variant="outlined"
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+    <Container maxWidth="sm" sx={{marginBottom:"50px"}}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          mt: 8,
+          boxShadow: 3,
+          p: 4,
+          borderRadius: 2,
+        }}
+      >
+        <Typography variant="h4" align="center" gutterBottom>
           Login
-        </Button>
-      </form>
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            label="Email"
+            variant="outlined"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required
+          />
+          <TextField
+            label="Password"
+            variant="outlined"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            required
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              mt: 3,
+              mb: 2,
+              background: "var(--var-color)",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "var(--var-hover)",
+              },
+            }}
+            fullWidth
+          >
+            Login
+          </Button>
+        </Box>
+      </Box>
     </Container>
   );
 };

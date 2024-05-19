@@ -23,7 +23,7 @@ const setUserHandler = (userdata) => {
     setIsAuthenticated(false);
     // navigate('/login');
   };
-
+  
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout,setUserHandler,user }}>
       {children}

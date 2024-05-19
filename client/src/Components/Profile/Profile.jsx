@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
-import { Container, Typography,TextField, Button, Avatar } from '@mui/material';
+import { Container,Box, Typography,TextField, Button, Avatar } from '@mui/material';
 import axios from "axios";
 import API_URL from "../Util/backend";
 
@@ -31,19 +31,27 @@ const Profile = () => {
   return (
     <div>
       {isAuthenticated ? (
-        <Container maxWidth="sm">
-          <p>{user._id}</p>
+        <Container maxWidth="sm" sx={{marginBottom:"40px"}}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            mt: 8,
+            boxShadow: 3,
+            p: 4,
+            borderRadius: 2,
+          }}
+        >
           <Typography variant="h4" align="center" gutterBottom>
             Profile
           </Typography>
           <Avatar
             alt={user.username}
-            src={`/path-to-badge-images/${user.username
-              .replace(/\s+/g, "-")
-              .toLowerCase()}.png`}
-            style={{ width: 60, height: 60, margin: "20px auto" }}
+            src={`/path-to-badge-images/${user.username.replace(/\s+/g, "-")}.png`}
+            sx={{ width: 80, height: 80, margin: "20px auto" }}
           />
-          <form method="post" onSubmit={handleSubmit}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               label="Name"
               variant="outlined"
@@ -52,6 +60,7 @@ const Profile = () => {
               onChange={handleChange}
               fullWidth
               margin="normal"
+              required
             />
             <TextField
               label="Email"
@@ -61,6 +70,7 @@ const Profile = () => {
               onChange={handleChange}
               fullWidth
               margin="normal"
+              required
             />
             <TextField
               label="Password"
@@ -71,12 +81,27 @@ const Profile = () => {
               onChange={handleChange}
               fullWidth
               margin="normal"
+              required
             />
-            <Button type="submit" variant="contained" color="primary" fullWidth>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                mt: 3,
+                mb: 2,
+                background: "var(--var-color)",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "var(--var-hover)",
+                },
+              }}
+              fullWidth
+            >
               Update
             </Button>
-          </form>
-        </Container>
+          </Box>
+        </Box>
+      </Container>
       ) : (
         "Login to the account"
       )}

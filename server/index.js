@@ -49,9 +49,30 @@ const Initiative =
   mongoose.model("PostModel", {
     description: String,
     cover: String,
+    like:{
+      type: Number,
+      default: 1,
+    },
   });
 
+  app.post('/like/:id', async(req,res) => {
+    const {id} = req.params;
+    try {
+      const updatedLike = await PostModel.findById(id);
+      let newlike = updatedLike.like+1;
+      await PostModel.updateOne({_id: id},{like: newlike})
+      
+      if (!updatedLike) {
+        return res.status(404).json({ message: "profile not found" });
+      }
+  
+      return res.json(updatedLike);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      res.status(500).json({ message: "Server error" });
+    }
 
+  })
   app.post('/post', uploadMiddlewear.single('file'), async (req, res) => {
     // path change
     const { originalname, path } = req.file;
@@ -74,9 +95,6 @@ const Initiative =
     fs.unlinkSync(uplfilepath);
 
     // url save db
-    // const { token } = req.cookies;
-    // jwt.verify(token, secret, {}, async (err, info) => {
-    //     if (err) throw err;
         const { description } = req.body;
         const postDoc = await PostModel.create({
             description,
@@ -90,7 +108,6 @@ app.put("/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
   try {
-    // Find the article by ID and update it with the new data
     const updatedProfile = await User.findByIdAndUpdate(id, req.body, {
       new: true,
     });
@@ -159,20 +176,20 @@ app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Replace 'YourUserModel' with your actual user model name or logic
+    
     const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ error: "User not found" });
     }
 
-    // Check if the password is correct
+ 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid password" });
     }
-    //   console.log(user._id);
+  
     const token = jwt.sign({ id: user._id }, "SECRET_KEY", { expiresIn: "1h" });
     res.status(200).json({ message: "Login successful", token,user });
   } catch (error) {
