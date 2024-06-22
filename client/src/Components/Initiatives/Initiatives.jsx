@@ -21,7 +21,7 @@ const Initiatives = () => {
     // Fetch data when the component mounts
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/getinitiative`);
+        const response = await axios.get(`${API_URL}/initiative/getinitiative`);
         setinitative(response.data);
       } catch (error) {
         console.error("Error fetching articles:", error);

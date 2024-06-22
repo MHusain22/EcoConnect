@@ -25,7 +25,7 @@ const Register = () => {
         const { email, password, username } = formData;
         if (email.length > 0 && password.length > 0 && username.length > 0) {
             try {
-                const response = await axios.post(`${API_URL}/register`, formData); //passing the data
+                const response = await axios.post(`${API_URL}/user/register`, formData); //passing the data
                 console.log("register Success", response.data);
                 navigate('/login');
             } catch (error) {

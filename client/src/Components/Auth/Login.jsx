@@ -29,7 +29,7 @@ const Login = () => {
     if (email.length > 0 && password.length > 0) {
       // alert("correct");
       try {
-        const response = await axios.post(`${API_URL}/login`, formData); //passing the data
+        const response = await axios.post(`${API_URL}/user/login`, formData); //passing the data
         console.log("login Success", response.data);
         console.log(response.data.user);
         setUserHandler(response.data.user);

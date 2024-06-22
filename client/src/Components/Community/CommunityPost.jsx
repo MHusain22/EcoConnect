@@ -15,7 +15,7 @@ const CommunityPost = ({ posts }) => {
   const handleLike = async(id) => {
     try {
       console.log(id);
-      const response = await axios.post(`${API_URL}/like/${id}`);
+      const response = await axios.post(`${API_URL}/post/like/${id}`);
       setLikes(response.data.like);
     } catch (error) {
       

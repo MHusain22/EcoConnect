@@ -23,7 +23,7 @@ const AddInitiative = ({ open, setOpen }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${API_URL}/addinitiative`,
+        `${API_URL}/initiative/addinitiative`,
         formData
       ); //passing the data
       console.log("initative added", response.data);
