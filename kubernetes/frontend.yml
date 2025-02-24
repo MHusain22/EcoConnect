@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+ metadata:
+   name: frontend-deployment
+   namespace: econamespace
+   labels:
+     app: frontend
+   spec:
+     replicas: 1
+     selector:
+       matchLabels:
+         app: frontend
+      template:
+        metadata:
+          name: frontend
+          labels:
+            app: frontend
+          spec:
+            containers:
+              - name: frontend
+                image: mhusain22/ecoconnect-frontend
+                ports:
+                - containerPort: 3000
+---
+
+apiVersion: apps/v1
+kind: Service
+  metadata:
+    name: frontend-service
+    namespace: econamespace
+  spec:
+    type: NodePort
+    selector:
+      app: frontend
+    ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      nodePort: 31000 
